@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+[x-cloak] {
+    display: none;
+}
+
+
+/* remove arrow input number */
+input[type=number]::-webkit-inner-spin-button{
+    display: none;
+}
