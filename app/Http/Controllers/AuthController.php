@@ -13,11 +13,17 @@ class AuthController extends Controller
 
     public function access()
     {
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
         return view('auth.login');
     }
 
     public function signup()
     {
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
         return view('auth.register');
     }
 
@@ -32,11 +38,12 @@ class AuthController extends Controller
         $user = User::where('email', $credentials['email'])->first();
         if ($user) {
             $response = Http::post(env('API_BASE_URL') . '/login', $credentials);
-
+            
             if ($response->status() == 401) {
                 return back()->withErrors(['email' => 'Las credenciales no coinciden.']);
             } else {
-                $user->token = $response->json()['token'];
+                $user->bearer_token = $response->json()['token'];
+                $user->save();
                 Auth::login($user);
                 Cache::put('token', $response->json()['token']);
                 return redirect()->intended('/');
@@ -52,6 +59,7 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed',
+            'phone' => 'required|string',
         ]);
 
         $data['abilities'] = ['read'];
@@ -60,7 +68,8 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'token' => $response['content']['token'],
+            'bearer_token' => $response['content']['token'],
+            'phone' => $request->phone,
         ]);
 
         auth()->login($user);

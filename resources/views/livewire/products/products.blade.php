@@ -25,7 +25,6 @@
 
     </div>
     @foreach ($categories as $category)
-        <h1 class="font-bold text-base md:text-xl uppercase text-center pt-8 pb-4">{{ $category['name'] }}</h1>
-        <livewire:carousel :items="$category['products']" />
+        <livewire:carousel :items="$category" />
     @endforeach
 </div>

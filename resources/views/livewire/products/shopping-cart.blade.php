@@ -40,6 +40,14 @@
                     </div>
                 @endforelse
             </div>
+            <div class="p-4">
+                
+                <div class="mt-4">
+                    <button wire:click="sendOrder"
+                        class="w-full bg-primary text-white text-center py-2 rounded-md hover:bg-primary-dark">
+                        Confirmar Pedido</button>
+                </div>
+            </div>
         </div>
     </div>
     

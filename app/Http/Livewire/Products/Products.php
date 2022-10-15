@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
-class Products extends Paginated
+class Products extends Component
 {
     public $categories = [];
 
@@ -27,16 +27,13 @@ class Products extends Paginated
             $token = env('API_AUTH_TOKEN');
             
             $params = [
-                'load' => 'products.stocks.unit|products.image|products.stock.unit',
-                'perpage' => 100,
-                'page' => $this->page,
-                'search' => request()->search,
+                'load' => 'image|stock.unit|category',
+                'nested' => 'category_id',
             ];
             $response = Http::withToken($token)
-                ->get(env('API_BASE_URL') . '/categories', $params);
+                ->get(env('API_BASE_URL') . '/products', $params);
             if ($response->successful()) {
-                $this->categories = $response->json()['content']['data'];
-                $this->links($response);
+                $this->categories = $response->json()['content'];
             } else {
                 dd($response->json());
             }

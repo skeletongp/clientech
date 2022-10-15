@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
-class HomePage extends Paginated
+class HomePage extends Component
 {
     public $products = [];
 
@@ -24,15 +24,13 @@ class HomePage extends Paginated
             $token = env('API_AUTH_TOKEN');
             $params = [
                 'load' => 'stocks.unit|image|stock.unit',
-                'perpage' => 4,
-                'page' => $this->page,
+                'limit' => 8,
                 'sort' => 'stock.price_menor',
             ];
             $response = Http::withToken($token)
                 ->get(env('API_BASE_URL') . '/products', $params);
             if ($response->successful()) {
-                $this->products = $response->json()['content']['data'];
-                $this->links($response);
+                $this->products = $response->json()['content'];
             } else {
                 dd($response->json());
             }

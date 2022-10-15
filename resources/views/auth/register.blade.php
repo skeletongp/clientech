@@ -18,27 +18,32 @@
                 <div class="bg-white px-4 space-y-6 py-4 rounded shadow-md text-black w-full">
                     <h1 class="mb-8 text-xl md:text-3xl font-bold text-center">Crea una cuenta</h1>
                     <div>
-                        <input type="text" class="block border border-grey-light w-full p-3 rounded "
-                            name="name" placeholder="Nombre Completo" />
+                        <input type="text" class="block border border-grey-light w-full p-3 rounded " name="name"
+                            placeholder="Nombre Completo" />
                         <x-input-error for="name"></x-input-error>
                     </div>
-                   <div>
-                    <input type="text" class="block border border-grey-light w-full p-3 rounded " name="email"
-                    placeholder="Correo Electrónico" />
-                    <x-input-error for="email"></x-input-error>
-                   </div>
-                   <div>
-                    <input type="password" class="block border border-grey-light w-full p-3 rounded "
-                    name="password" placeholder="Contraseña" />
-                    <x-input-error for="password"></x-input-error>
-                   </div>
+                    <div>
+                        <input type="text" class="block border border-grey-light w-full p-3 rounded " name="email"
+                            placeholder="Correo Electrónico" />
+                        <x-input-error for="email"></x-input-error>
+                    </div>
+                    <div>
+                        <input type="number" class="block border border-grey-light w-full p-3 rounded " name="phone"
+                            placeholder="Teléfono" />
+                        <x-input-error for="phone"></x-input-error>
+                    </div>
                     <div>
                         <input type="password" class="block border border-grey-light w-full p-3 rounded "
-                        name="password_confirmation" placeholder="Confirme la Contraseña" />
+                            name="password" placeholder="Contraseña" />
+                        <x-input-error for="password"></x-input-error>
+                    </div>
+                    <div>
+                        <input type="password" class="block border border-grey-light w-full p-3 rounded "
+                            name="password_confirmation" placeholder="Confirme la Contraseña" />
                     </div>
                     <x-button
-                        class=" uppercase mx-auto justify-center w-full text-white bg-teal-700 hover:bg-teal-300 hover:text-black">
-                        Acceder
+                        class=" uppercase mx-auto justify-center w-full font-bold text-gray-50 bg-primary hover:bg-gray-50 hover:text-primary">
+                        Registrarse
                     </x-button>
                 </div>
             </form>
